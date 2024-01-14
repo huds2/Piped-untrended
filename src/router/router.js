@@ -4,12 +4,7 @@ const routes = [
     {
         path: "/",
         name: "Home",
-        component: () => import("../components/TrendingPage.vue"),
-    },
-    {
-        path: "/trending",
-        name: "Trending",
-        component: () => import("../components/TrendingPage.vue"),
+        component: () => import("../components/FeedPage.vue"),
     },
     {
         path: "/preferences",

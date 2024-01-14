@@ -38,9 +38,6 @@
         </button>
         <!-- navigation bar for large screen devices -->
         <ul class="md:text-1xl hidden md:(flex flex flex-1 justify-end children:pl-3)">
-            <li v-if="shouldShowTrending">
-                <router-link v-t="'titles.trending'" to="/trending" />
-            </li>
             <li>
                 <router-link v-t="'titles.preferences'" to="/preferences" />
             </li>
@@ -56,7 +53,7 @@
             <li>
                 <router-link v-t="'titles.playlists'" to="/playlists" />
             </li>
-            <li v-if="!shouldShowTrending">
+            <li>
                 <router-link v-t="'titles.feed'" to="/feed" />
             </li>
         </ul>
@@ -66,10 +63,6 @@
         v-if="showTopNav"
         class="mobile-nav mb-4 flex flex-col children:(w-full flex items-center gap-1 border-b border-dark-100 p-1)"
     >
-        <router-link v-if="shouldShowTrending" to="/trending">
-            <div class="i-fa6-solid:fire"></div>
-            <i18n-t keypath="titles.trending"></i18n-t>
-        </router-link>
         <router-link to="/preferences">
             <div class="i-fa6-solid:gear"></div>
             <i18n-t keypath="titles.preferences"></i18n-t>
@@ -90,7 +83,7 @@
             <div class="i-fa6-solid:list"></div>
             <i18n-t keypath="titles.playlists"></i18n-t>
         </router-link>
-        <router-link v-if="!shouldShowTrending" to="/feed">
+        <router-link to="/feed">
             <div class="i-fa6-solid:play"></div>
             <i18n-t keypath="titles.feed"></i18n-t>
         </router-link>
@@ -145,8 +138,8 @@ export default {
         shouldShowHistory(_this) {
             return _this.getPreferenceBoolean("watchHistory", false);
         },
-        shouldShowTrending(_this) {
-            return _this.getPreferenceString("homepage", "trending") != "trending";
+        shouldShowTrending() {
+            return false;
         },
         showSearchHistory(_this) {
             return _this.getPreferenceBoolean("searchHistory", false) && localStorage.getItem("search_history");
